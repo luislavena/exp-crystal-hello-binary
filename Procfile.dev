@@ -1,0 +1,2 @@
+# watch for changes in src and rebuild target binaries
+autobuild: watchexec -w src -f '**/*.cr' --on-busy-update=do-nothing -- shards build hello --stats
