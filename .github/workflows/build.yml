@@ -16,8 +16,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.4.0
 
+      # TODO:
+      # - Cache container image to reduce pulling on each build
+      # - Always check if image is up-to-date (using `--pull always` on `docker run`)
+
       - name: Build static executable
-        run: docker run --rm -v ${{ github.workspace }}:/app -w /app -u $(id -u):$(id -g) $HYDROFOIL_IMAGE shards build --stats --release --static
+        run: docker run --rm -v $(pwd):/app -w /app -u $(id -u):$(id -g) $HYDROFOIL_IMAGE shards build --stats --release --static
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
